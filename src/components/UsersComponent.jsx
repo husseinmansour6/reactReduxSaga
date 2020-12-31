@@ -1,5 +1,5 @@
 import React, { useEffect } from "react"
-import { useSelector, useDispatch } from "redux"
+import { useSelector, useDispatch } from "react-redux"
 import { getUsers } from "../redux/actions/users"
 import Card from "./CardComponent"
 
