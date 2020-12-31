@@ -7,26 +7,19 @@ const Users = () => {
   // useEffect to handle the action and dispatch it in our component
   const dispatch = useDispatch()
   const users = useSelector(state => state.users.users)
+  const loading = useSelector(state => state.users.loading)
+  const error = useSelector(state => state.users.error)
 
   useEffect(() => {
-    dispatch(
-      getUsers([
-        {
-          id: 1,
-          name: "blah blah",
-          company: {
-            name: "Company1",
-            catchPhrase: "hey there"
-          }
-        }
-      ])
-    )
+    dispatch(getUsers())
   }, [])
   return (
     <>
+      {loading && <p>Loading ...</p>}
       {users.length > 0 &&
         users.map(user => <Card user={user} key={user.id} />)}
-      {users.length === 0 && <p>No users available!</p>}
+      {users.length === 0 && !loading && <p>No users available!</p>}
+      {error && !loading && <p>{error}</p>}
     </>
   )
 }

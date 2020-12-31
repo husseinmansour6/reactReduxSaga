@@ -1,8 +1,8 @@
-import { call, put, takeEvery } from "redux-saga"
+import { call, put, takeEvery } from "redux-saga/effects"
 
 const apiUrl = "https://jsonplaceholder.typicode.com/users"
 
-function* fetchApi() {
+function getApi() {
   return fetch(apiUrl, {
     method: "GET",
     headers: {
@@ -17,7 +17,7 @@ function* fetchApi() {
 
 function* fetchUsers(action) {
   try {
-    const users = yield call(fetchApi)
+    const users = yield call(getApi)
     yield put({
       type: "GET_USERS_SUCCESS",
       users: users
